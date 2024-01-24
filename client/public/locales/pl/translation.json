@@ -1,0 +1,14 @@
+{
+    "Name": "Nazwa",
+    "Back": "Powrót",
+    "Email": "E-mail",
+    "Terms": "Warunki",
+    "Privacy": "Prywatność",
+    "get_notified": "Otrzymaj powiadomienie, gdy aplikacja będzie dostępna w Twoim regionie",
+    "currently_available": "Dostępne regiony",
+    "Country or region": "Kraj lub region",
+    "Continue": "Kontynuuj",
+    "Country": "Kraj",
+    "Address": "Adres",
+    "submit_helper": "Kontynuując, zezwalasz {{organization}} na skontaktowanie się z Tobą po uruchomieniu w Twoim regionie zgodnie z ich warunkami."
+}

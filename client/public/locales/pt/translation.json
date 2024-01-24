@@ -1,0 +1,14 @@
+{
+    "Name": "Nome",
+    "Back": "Voltar",
+    "Email": "E-mail",
+    "Terms": "Condições",
+    "Privacy": "Privacidade",
+    "get_notified": "Ser notificado quando estiver disponível na sua região",
+    "currently_available": "Regiões disponíveis",
+    "Country or region": "País ou região",
+    "Continue": "Continuar",
+    "Country": "País",
+    "Address": "Endereço",
+    "submit_helper": "Ao continuar, permite que a {{organization}} entre em contacto consigo assim que for lançada na sua região, de acordo com os seus termos."
+}

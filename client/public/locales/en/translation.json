@@ -1,0 +1,14 @@
+{
+    "Name": "Name",
+    "Back": "Back",
+    "Email": "Email",
+    "Terms": "Terms",
+    "Privacy": "Privacy",
+    "get_notified": "Get notified when it is available in your region",
+    "currently_available": "Available regions",
+    "Country or region": "Country or region",
+    "Continue": "Continue",
+    "Country": "Country",
+    "Address": "Address",
+    "submit_helper": "By continuing, you allow {{organization}} to get in touch with you once they have launched on your region in accordance with their terms."
+}

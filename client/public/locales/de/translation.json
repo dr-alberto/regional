@@ -1,0 +1,14 @@
+{
+    "Name": "Name",
+    "Back": "Zurück",
+    "Email": "E-Mail",
+    "Terms": "Bedingungen",
+    "Privacy": "Datenschutz",
+    "get_notified": "Lassen Sie sich benachrichtigen, wenn es in Ihrer Region verfügbar ist",
+    "currently_available": "Verfügbare Regionen",
+    "Country or region": "Land oder Region",
+    "Continue": "Weiter",
+    "Country": "Land",
+    "Address": "Adresse",
+    "submit_helper": "Indem Sie fortfahren, erlauben Sie {{organization}}, sich mit Ihnen in Verbindung zu setzen, sobald sie in Ihrer Region gemäß ihren Bedingungen gestartet sind."
+}

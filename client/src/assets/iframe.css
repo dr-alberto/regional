@@ -1,0 +1,13 @@
+#wrap { width: 1096px; height: 600px; padding: 0; overflow: hidden; }
+#frame { width: 1461px; height: 800px; }
+#wrap-mobile { width: 375px; height: 667px; padding: 0; overflow: hidden; }
+#frame-mobile { width: 100%; height: 100%; }
+#frame {
+    -ms-zoom: 0.75;
+    -moz-transform: scale(0.75);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.75);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.75);
+    -webkit-transform-origin: 0 0;
+}

@@ -1,0 +1,14 @@
+{
+    "Name": "名称",
+    "Back": "バック",
+    "Email": "電子メール",
+    "Terms": "条件",
+    "Privacy": "プライバシー",
+    "get_notified": "お住まいの地域で発売されたらお知らせします。",
+    "currently_available": "利用可能な地域",
+    "Country or region": "国または地域",
+    "Continue": "続ける",
+    "Country": "国名",
+    "Address": "住所",
+    "submit_helper": "続行することで、あなたは{{XYZ}}が規約に従ってあなたの地域でサービスを開始した後、{{organization}}があなたに連絡を取ることを許可します。"
+}

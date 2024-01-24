@@ -1,0 +1,14 @@
+{
+    "Name": "Nome",
+    "Back": "Indietro",
+    "Email": "Email",
+    "Terms": "Termini",
+    "Privacy": "La privacy",
+    "get_notified": "Ricevi una notifica quando è disponibile nella tua regione",
+    "currently_available": "Regioni disponibili",
+    "Country or region": "Paese o regione",
+    "Continue": "Continua",
+    "Country": "Paese",
+    "Address": "Indirizzo",
+    "submit_helper": "Continuando, permettete a {{organization}} di contattarvi una volta lanciato il progetto nella vostra regione, in conformità con le sue condizioni."
+}
