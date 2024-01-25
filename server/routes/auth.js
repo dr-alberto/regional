@@ -3,13 +3,13 @@ const { User, validateUser } = require("../models/user");
 // const Token = require("../models/token");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
-const sendEmail = require("../utils/sendEmail");
-const requireAuth = require("../middleware/requireAuth");
+// const sendEmail = require("../utils/sendEmail");
+// const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
 
-router.post("/signup", async (req, res) => {
+router.post("/api/signup", async (req, res) => {
     try {
         const user = req.body;
         const { error, value } = validateUser(user);
@@ -103,7 +103,7 @@ router.post("/signup", async (req, res) => {
 // });
 
 
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
     const userLogging = req.body;
 
     const user = await User.findOne({email: userLogging.email})

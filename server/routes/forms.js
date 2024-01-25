@@ -70,10 +70,10 @@ router.get("/live/:id", async (req, res) => {
 })
 
 // CREATE form
-router.post("/forms", requireAuth, formValidators.formValidator, formController.createForm)
+router.post("/api/forms", requireAuth, formValidators.formValidator, formController.createForm)
 
 // EDIT form 
-router.post("/forms/:id", requireAuth, upload.single("productImg"), formValidators.formValidator, formController.updateForm)
+router.post("/api/forms/:id", requireAuth, upload.single("productImg"), formValidators.formValidator, formController.updateForm)
 
 
 
@@ -97,7 +97,7 @@ const processUserForm = async (userForm, countryCount) => {
 
   
 // GET user forms overview
-router.get("/forms/overview", requireAuth, async (req, res) => {
+router.get("/api/forms/overview", requireAuth, async (req, res) => {
     const userId = req.user.id;
     const userForms = await Form.find({ userId: userId })
 
@@ -135,7 +135,7 @@ router.get("/forms/overview", requireAuth, async (req, res) => {
 })
 
 // GET form
-router.get("/forms/:id", async (req, res) => {
+router.get("/api/forms/:id", async (req, res) => {
     const mode = req.query.mode; // 'live' if portal is fetched from live user portal page
     const formId = req.params.id;
 
@@ -162,7 +162,7 @@ router.get("/forms/:id", async (req, res) => {
 
 
 // GET all user's forms
-router.get("/forms", requireAuth, async (req, res) => {
+router.get("/api/forms", requireAuth, async (req, res) => {
     const userId = req.user.id;
     try {
         const forms = await Form.find({userId: userId})
@@ -175,10 +175,10 @@ router.get("/forms", requireAuth, async (req, res) => {
 
 
 
-// DELETE form
-router.delete("/forms", async (req, res) => {
-    const formId = req.params.id;
-})
+// // DELETE form
+// router.delete("/forms", async (req, res) => {
+//     const formId = req.params.id;
+// })
 
 
 

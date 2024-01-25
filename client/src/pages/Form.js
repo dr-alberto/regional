@@ -39,7 +39,7 @@ const Form = () => {
         // document.title = "Form edit"
         const fetchForm = async () => {
             try {
-                const response = await fetch(`/forms/${id}`, {
+                const response = await fetch(`/api/forms/${id}`, {
                     headers: {
                         "x-access-token": user.token
                     }
@@ -109,7 +109,7 @@ const Form = () => {
                 }
             }
 
-            fetch(`/forms/${id}`, {
+            fetch(`/api/forms/${id}`, {
                 method: 'POST',
                 headers: {
                     "x-access-token": user.token,
@@ -266,7 +266,7 @@ const Form = () => {
                                                 <div className="mt-2">
                                                     <input
                                                     type="text"
-                                                    value={`${customDomain}/portal/${id}`}                                                
+                                                    value={`${customDomain}/live/${id}`}                                                
                                                     disabled
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                                                     />
@@ -590,9 +590,14 @@ const Form = () => {
                                             </div>
 
                                             <div className='mt-5'>
-                                                <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Current availability
-                                                </label>
+                                                <div className="flex flex-col">
+                                                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                                                        Current availability
+                                                    </label>
+                                                    <div className="text-sm text-gray-500">
+                                                        Regions where your product is currently available
+                                                    </div>
+                                                </div>
                                                 <div className="mt-2">
                                                     <AvailabilityOptions
                                                         data={COUNTRIES}

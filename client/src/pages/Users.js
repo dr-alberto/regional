@@ -10,7 +10,7 @@ export default function Users() {
     useEffect(() => {
         const fetchForms = async () => {
             try {
-                const response = await fetch('/forms', {
+                const response = await fetch('/api/forms', {
                     headers: {
                         "x-access-token": user.token
                     },

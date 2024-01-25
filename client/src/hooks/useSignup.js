@@ -11,7 +11,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/signup', {
+        const response = await fetch('/api/signup', {
             method: 'POST',
             headers: {"Content-type": "application/json"},
             body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, password: password})

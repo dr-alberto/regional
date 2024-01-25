@@ -53,7 +53,7 @@ const FormsGrid = ({ organization }) => {
     useEffect(() => {
         const fetchForms = async () => {
             try {
-                const response = await fetch('/forms', {
+                const response = await fetch('/api/forms', {
                     headers: {
                         "x-access-token": user.token
                     },
@@ -114,7 +114,7 @@ const FormsGrid = ({ organization }) => {
         e.preventDefault()
         
         try {
-            const response = await fetch('/forms', {
+            const response = await fetch('/api/forms', {
                 method: 'POST',
                 headers: {
                     "x-access-token": user.token,
@@ -346,7 +346,7 @@ export default function Dashboard() {
     const [countriesData, setCountriesData] = useState({})
 
     useEffect(() => {
-        fetch('/forms/overview', {
+        fetch('/api/forms/overview', {
             headers: {
                 "x-access-token": user.token,
             },

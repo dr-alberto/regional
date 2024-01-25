@@ -43,11 +43,12 @@ const UserPortalPreview = () => {
     useEffect(() => {
         const fetchForm = async () => {
             try {
-                const response = await fetch(`/forms/${id}`);
+                const response = await fetch(`/api/forms/${id}`);
 
                 const result = await response.json();
                 
                 setForm(result.form);
+                
                 setOrganization(result.organization);
                 
                 parseAvailableRegions(result.form.availableRegions)
@@ -77,12 +78,12 @@ const UserPortalPreview = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" className='me-2'><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128z"/></svg>
                             <span>{t("Back")}</span>
                         </a>
-                        <img src={`/static/${organization.logo}`} alt="Current Image" className="w-14 h-auto rounded ring-gray-300" />
+                        <img src={`/static/${organization.logo}`} alt="Organization logo" className="w-14 h-auto rounded ring-gray-300" />
                     </div>
 
                     <p className="text-xl font-bold tracking-tight text-zinc-900">{t('get_notified')}</p>
                     <div className='flex gap-x-3 mt-10'>
-                        <img src={`/static/${form.productImg}`} alt="Current Image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />
+                        {form.productImg && <img src={`/static/${form.productImg}`} alt="Product image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />}
                         <div className=''>
                             <p className='text-base font-semibold'>{form.productName}</p>
                             <p className='text-sm text-gray-600'>{form.productDescription}</p>
@@ -103,7 +104,7 @@ const UserPortalPreview = () => {
                     )}
 
                     <div className='mt-40 flex justify-between'>
-                        <a href="#" target='_blank'>
+                        <a href='#' target='_blank'>
                             <img className="h-7 w-auto grayscale" src="/logo.svg" alt=""/>
                         </a>
                         <div className='flex gap-x-2 text-gray-600'>
@@ -159,7 +160,7 @@ const UserPortalPreview = () => {
                             <Disclosure.Panel className="lg:hidden absolute top-16 z-20 w-full">
                                 <div className="bg-white p-4">
                                     <div className='flex gap-x-3 mt-10'>
-                                        <img src={`/static/${form.productImg}`} alt="Current Image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />
+                                        {form.productImg && <img src={`/static/${form.productImg}`} alt="Product image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />}
                                         <div className=''>
                                             <p className='text-base font-semibold'>{form.productName}</p>
                                             <p className='text-sm text-gray-600'>{form.productDescription}</p>
@@ -180,7 +181,7 @@ const UserPortalPreview = () => {
                                     )}
 
                                     <div className='mt-40 flex justify-between'>
-                                        <a href="#" target='_blank'>
+                                        <a href='#' target='_blank'>
                                             <img className="h-7 w-auto grayscale" src="/logo.svg" alt=""/>
                                         </a>
                                         <div className='flex gap-x-2 text-gray-600'>
