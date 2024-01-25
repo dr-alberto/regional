@@ -18,6 +18,8 @@ import PortalUsers from './pages/PortalUsers';
 import Docs from './pages/Docs';
 import NotFound from './pages/NotFound';
 import PaymentSuccess from './pages/PaymentSuccess';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 // TODO
 // Add docs: https://docusaurus.io/
 
@@ -52,6 +54,8 @@ function App() {
         ) : ( */}
             <Routes>
                 <Route element={<Home />} exact path="/"/>
+                <Route element={<Privacy />} exact path="/privacy"/>
+                <Route element={<Terms />} exact path="/terms"/>
                 <Route element={!user ? <Login /> : <Navigate to="/dashboard"/>} exact path="/login"/>
                 <Route element={!user ? <Signup /> : <Navigate to="/dashboard"/>} exact path="/register"/>
                 

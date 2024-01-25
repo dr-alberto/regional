@@ -29,7 +29,7 @@ export default function Signup() {
                 alt="Your Company"
             />
           </a>
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-20 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
             Create your account
           </h2>
         </div>
@@ -136,7 +136,7 @@ export default function Signup() {
             </div>
             {error && <div className='error'>{error}</div>}
           </form>
-
+          
           <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?{' '}
             <a href="/login" className="font-semibold leading-6 text-teal-600 hover:text-teal-500">

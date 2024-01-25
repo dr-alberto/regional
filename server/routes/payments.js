@@ -1,6 +1,6 @@
 const express = require('express');
 const requireAuth = require('../middleware/requireAuth');
-const stripe = require('stripe')(process.env.STRIPE_PUBLIC_KEY);
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const { User } = require('../models/user')
 const router = express.Router();
 

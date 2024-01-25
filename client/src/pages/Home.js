@@ -6,7 +6,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
     { name: 'Solution', href: '#solution' },
     { name: 'Pricing', href: '#pricing' },
-    { name: 'Contact', href: '#' },
+    { name: 'Contact', href: 'mailto:info@regionalhq.com' },
 ]
 
 
@@ -137,6 +137,43 @@ export default function Home() {
             
         </div>
 
+        
+        <div id="solution" className="overflow-hidden bg-white py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+                    <div className="lg:max-w-lg">
+                        <h2 className="text-base font-semibold leading-7 text-rose-600">Before</h2>
+                        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                            Your limited regional reach is causing you to lose out on potential revenue.
+                        </p>
+
+                        <img
+                            src="/before.png"
+                            alt="Product screenshot"
+                            className="rounded-md shadow-md mt-6 w-full"
+                        />
+                        
+                    </div>
+                        
+                    <div className="lg:max-w-lg">
+                        <h2 className="text-base font-semibold leading-7 text-teal-600">Using Regional</h2>
+                        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">You start capturing future customers with ease</p>
+                        <p className="mt-6 text-lg leading-8 text-gray-600">
+                            Add a link to a custom user portal and capture future customers from regions where you are not yet available
+                        </p>
+                        <img
+                            src="/after.png"
+                            alt="Product screenshot"
+                            className="rounded-md shadow-md mt-5 w-full"
+                        />
+
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
 
         <div id="solution" className="overflow-hidden bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -195,12 +232,63 @@ export default function Home() {
         </div>
         
 
+        <div className="bg-white py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <h2 className="text-base font-semibold leading-7 text-teal-600">Integrate</h2>
+                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Add your user portal to your website in a click</p>
+                <p className="mt-2 text-lg leading-8 text-gray-600">
+                Add a link on your payment page and start redirecting users from unavailable regions to your user portal.
+                </p>
+                {/* <div className=" mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+                <img
+                    className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+                    src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg"
+                    alt="Transistor"
+                    width={158}
+                    height={48}
+                />
+                <img
+                    className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+                    src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-900.svg"
+                    alt="Reform"
+                    width={158}
+                    height={48}
+                />
+                <img
+                    className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+                    src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-900.svg"
+                    alt="Tuple"
+                    width={158}
+                    height={48}
+                />
+                <img
+                    className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
+                    src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-900.svg"
+                    alt="SavvyCal"
+                    width={158}
+                    height={48}
+                />
+                <img
+                    className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+                    src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-900.svg"
+                    alt="Statamic"
+                    width={158}
+                    height={48}
+                />
+                </div> */}
+                <a href="/register" className="flex rounded-full w-fit mt-5 bg-teal-600 px-3 py-1.5 text-sm font-bold text-white shadow-sm hover:bg-blue-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">
+                    Start now
+                </a>
+            </div>
+        </div>
+            
+
         <div className='mt-20 mx-auto max-w-7xl px-6 lg:px-0 py-24 sm:py-32'>
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 Reach anyone, anywhere
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-                Add a link to your website and start capturing future clients with Regional.
+                Start capturing future clients with Regional.<br/>
                 You can download a CSV of your users contact information at any moment.
             </p>
             
@@ -512,6 +600,25 @@ export default function Home() {
                 </div>
             </div>
         </div>
+
+
+        <footer className="bg-white">
+            <div className="container px-6 py-8 mx-auto">
+
+
+                <hr className="my-10 border-gray-200" />
+
+                <div className="flex flex-col items-center sm:flex-row sm:justify-between">
+                    <p className="text-sm text-gray-500">© Copyright 2024. All Rights Reserved.</p>
+
+                    <div className="flex mt-3 -mx-2 sm:mt-0">
+                        <a href="mailto:info@regionalhq.com" className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"> Contact </a>
+                        <a href="/terms" className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"> Terms of Service </a>
+                        <a href="/privacy" className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"> Privacy policy </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
   )
 }
