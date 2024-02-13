@@ -5,7 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 
-require("dotenv").config({ path: "./config.env" });
+require("dotenv").config({ path: path.resolve(__dirname, "config.env") });
 
 
 const app = express();
@@ -40,7 +40,7 @@ app.use('/api', require("./routes/customers"));
 app.use('/api', require("./routes/payments"));
 app.use('/api', require("./routes/integrations"));
 
-app.use('/static', express.static('public')); // Images on 'uploads' directory are visible
+app.use('/static', express.static(path.join(__dirname, 'public'))); // Images on 'uploads' directory are visible
 
 
 const buildPath = path.join(__dirname, './../client/build');
