@@ -10,16 +10,21 @@ import Login from "./pages/Login";
 import Settings from "./pages/Settings"
 import Dashboard from './pages/Dashboard';
 import Billing from './pages/Billing';
-import Form from './pages/Form';
-import UserPortal from './pages/UserPortal';
-import UserPortalPreview from './pages/UserPortalPreview';
+import { EditPortal } from './pages/EditPortal';
+import Portal from './pages/Portal';
+import PortalPreview from './pages/PortalPreview';
 import Users from './pages/Users';
 import PortalUsers from './pages/PortalUsers';
+import SiteUsers from './pages/SiteUsers';
 import Docs from './pages/Docs';
 import NotFound from './pages/NotFound';
 import PaymentSuccess from './pages/PaymentSuccess';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import Demo from './pages/Demo';
+import Site from './pages/Site';
+import Prompt from './components/Prompt';
+import { EditPrompt } from './pages/EditPrompt';
 // TODO
 // Add docs: https://docusaurus.io/
 
@@ -39,7 +44,7 @@ function App() {
         setLoading(false)
     }, []) 
 
-
+    // window.Prompt = Prompt
     ///////////////
     // https://stackoverflow.com/questions/61884567/subdomain-routing-in-react-and-react-router
     ///////////////
@@ -56,31 +61,29 @@ function App() {
                 <Route element={<Home />} exact path="/"/>
                 <Route element={<Privacy />} exact path="/privacy"/>
                 <Route element={<Terms />} exact path="/terms"/>
+                <Route element={<Demo />} exact path="/demo"/>
+
                 <Route element={!user ? <Login /> : <Navigate to="/dashboard"/>} exact path="/login"/>
                 <Route element={!user ? <Signup /> : <Navigate to="/dashboard"/>} exact path="/register"/>
-                
-                
-                {/* Auth pages */}
-                {/* CHeck user is verified to redirect */}
-                <Route element={user ? <VerifyEmail /> : <Navigate to="/login"/>} exact path="/verify"/>
-                <Route element={user ? <ResetEmail /> : <Navigate to="/login"/>} exact path="/reset"/>
-                
+
+                {/* <Route element={user ? <VerifyEmail /> : <Navigate to="/login"/>} exact path="/verify"/>
+                <Route element={user ? <ResetEmail /> : <Navigate to="/login"/>} exact path="/reset"/> */}
+
                 <Route element={user ? <Dashboard /> : <Navigate to="/login"/>} exact path="/dashboard"/>
+                <Route element={user ? <Site /> : <Navigate to="/login"/>} exact path="/sites/:siteId"/>
                 <Route element={user ? <Settings /> : <Navigate to="/login"/>} exact path="/settings"/>
                 <Route element={user ? <Billing /> : <Navigate to="/login"/>} exact path="/billing"/>
                 <Route element={user ? <PaymentSuccess /> : <Navigate to="/login"/>} exact path="/success"/>
-                <Route element={user ? <Form /> : <Navigate to="/login"/>} exact path="/forms/:id"/>
+                <Route element={user ? <EditPortal /> : <Navigate to="/login"/>} exact path="/portals/:id"/>
+                <Route element={user ? <EditPrompt /> : <Navigate to="/login"/>} exact path="/prompts/:id"/>
+
                 <Route element={user ? <Users /> : <Navigate to="/login"/>} exact path="/users"/>
-                <Route element={user ? <PortalUsers /> : <Navigate to="/login"/>} exact path="/users/:portalId"/>
+                <Route element={user ? <SiteUsers /> : <Navigate to="/login"/>} exact path="/users/:siteId"/>
+                <Route element={user ? <PortalUsers /> : <Navigate to="/login"/>} exact path="/users/:siteId/:portalId"/>
 
-                {/* https://stackoverflow.com/questions/36052604/how-to-let-react-router-respond-with-404-status-code */}
-
-                {/* Limit request to live form to user specified domains */}
-                <Route element={<UserPortalPreview />} exact path="/test/:id"/>
-                <Route element={<UserPortal />} exact path="/live/:id"/>
-
+                <Route element={<PortalPreview />} exact path="/test/:id"/>
+                <Route element={<Portal />} exact path="/live/:id"/>
                 <Route path='*' element={<NotFound />}/>
-
             </Routes>
         {/* ) */}
 

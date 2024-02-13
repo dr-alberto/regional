@@ -1,6 +1,9 @@
 # Dependency directories
 node_modules/
 
+*.png
+*.jpg
+
 # dotenv environment variable files
 .env
 .env.development.local

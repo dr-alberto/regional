@@ -3,6 +3,7 @@ const requireAuth = require('../middleware/requireAuth');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const { User } = require('../models/user')
 const router = express.Router();
+const getPriceIdFromSubscription = require('./utils')
 
 
 
@@ -76,13 +77,8 @@ router.get('/config', requireAuth, (req, res) => {
 router.get('/subInfo', requireAuth, async (req, res) => {
     const user = await User.findById(req.user.id);
     const subscriptionId = user.subscriptionId
-    let plan;
-
-    if (subscriptionId) {
-        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-
-        plan = subscription.items.data[0].price.id;
-    }
+    
+    const plan = await getPriceIdFromSubscription(subscriptionId);
     
     res.json({
         plan

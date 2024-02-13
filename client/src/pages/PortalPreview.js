@@ -1,167 +1,114 @@
-import React, { Fragment, useState, useEffect, startTransition } from 'react';
-import { useParams } from 'react-router-dom';
-import { Listbox, Transition, Disclosure } from '@headlessui/react'
+import React, { Fragment, useState, useEffect } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { Listbox, Portal, Transition } from '@headlessui/react'
 import { classNames } from '../utils/utils'
 import AutocompleteSearch from '../components/AutocompleteSearch';
 import { COUNTRIES } from '../utils/constants';
 import { useTranslation } from "react-i18next";
+import { Disclosure } from '@headlessui/react';
 
 
-const UserPortal = () => {
-    const { t, i18n } = useTranslation();
+
+const PortalPreview = () => {
+    const { t } = useTranslation();
     const { id } = useParams();
-    const [form, setForm] = useState(null);
+    const [portal, setPortal] = useState(null);
     const [organization, setOrganization] = useState(null);
     const [loading, setIsLoading] = useState(true);
     const [selected, setSelected] = useState(null);
     const [regions, setRegions] = useState([]);
-
-    const [data, setData] = useState({});
-    const [error, setError] = useState(false);
-
-    const ApiKey = "AIzaSyAYQjHut29uoD0cb8ejPKD0zsp_B_2Wq9I"
+    const [searchParams, setSearchParams] = useSearchParams();
     
     const [selectedPlace, setSelectedPlace] = useState(null);
 
     const handleSelectPlace = (place) => {
-        startTransition(() => {
-            setSelectedPlace(place);
-        })
+        setSelectedPlace(place);
     };
 
     const handleSelectCountry = (country) => {
-        startTransition(() => {
-            setSelected(country)
-            setError(false)
-        })
+        setSelected(country)
     }
 
-    const parseAvailableRegions = (regionsStr) => {
-        const regions = regionsStr[0].split(',')
-
-        startTransition(() => {
-            setRegions([])
-        })
-        
+    const parseAvailableRegions = (regions) => {
+        setRegions([])
         
         regions.map((regionId) => {
             const country = COUNTRIES.filter((c) => c.id === regionId)[0]
-
-            startTransition(() => {
-                setRegions(prevRegions => {
-                    return [...prevRegions, country.name]
-                })
+            setRegions(prevRegions => {
+                return [...prevRegions, country.name]
             })
-            
         })
-    }    
+    }
+
+    // Set on prompt
+    const setInitialCountry = () => {
+        const countryCode = searchParams.get('cc')
+    
+        if (countryCode) {
+            const country = COUNTRIES.filter((c) => c.id === countryCode)[0]
+            
+            if (country) {
+                setSelected(country)
+            }
+            
+        }
+
+    }
 
     useEffect(() => {
         const fetchForm = async () => {
             try {
-                const response = await fetch(`/api/forms/${id}?mode=live`)
+                const response = await fetch(`/api/portals/${id}`);
 
                 const result = await response.json();
                 
-                startTransition(() => {
-                    setForm(result.form);
-                    setOrganization(result.organization);
-                })
+                setPortal(result.portal);
                 
+                setOrganization(result.site);
                 
-                parseAvailableRegions(result.form.availableRegions)
+                parseAvailableRegions(result.portal.availableRegions)
 
             } catch (error) {
                 
             } finally {
-                startTransition(() => {
-                    setIsLoading(false)
-                })
+                setIsLoading(false)
             }
         };
 
         fetchForm();
+        setInitialCountry();
 
     }, [])
 
-    useEffect(() => {
-        const currentLanguage = i18n.language;
-        const languageQueryParam = `lng=${currentLanguage}`;
-        const currentUrl = window.location.href;
-
-        // Check if the language query parameter is not already present
-        if (!currentUrl.includes(languageQueryParam)) {
-        const separator = currentUrl.includes('?') ? '&' : '?';
-        const newUrl = `${currentUrl}${separator}${languageQueryParam}`;
-        window.history.replaceState({}, document.title, newUrl);
-        }
-      }, [i18n.language]);
-    
-
-
     function handleSubmit(e) {
         e.preventDefault();
-        
-        if (!selected) {
-            
-            startTransition(() => {setError(true)})
-            
-            return
-        }
-
-        const payload = {
-            name: data.name,
-            email: data.email,
-            country: selected.id,
-            address: selectedPlace
-        }
-
-        fetch(`/customers/${id}`, {
-            method: 'POST',
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            window.location.href = form.successUrl
-        })
-        
     }
 
-    function handleChange(e) {
-        startTransition(() => {
-            setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
-        })
-        
-    }
-      
+
     return !loading && (
-        <div style={{fontFamily: `${form.formFont}, system-ui, sans-serif`}}  className='grid grid-cols-12 gap-4 min-h-screen'>
+        <div style={{fontFamily: `${portal.font}, system-ui, sans-serif`}} className='grid grid-cols-12 gap-4 min-h-screen'>
             <div className='hidden lg:flex col-span-6 bg-slate-50 flex items-center'>
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <div className='flex justify-between items-center mb-6'>
-                        <a href={form.cancelUrl} className='font-bold flex text-sm items-center hover:text-zinc-600'>
+                        <a href='#' className='font-bold flex text-sm items-center hover:text-zinc-600'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" className='me-2'><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128z"/></svg>
                             <span>{t("Back")}</span>
                         </a>
-                        <img src={`/static/${organization.logo}`} alt="Current Image" className="w-14 h-auto rounded ring-gray-300" />
+                        <img src={`/static/${portal.brandName}`} alt="Organization logo" className="w-14 h-auto rounded ring-gray-300" />
                     </div>
 
                     <p className="text-xl font-bold tracking-tight text-zinc-900">{t('get_notified')}</p>
                     <div className='flex gap-x-3 mt-10'>
-                        {form.productImg && <img src={`/static/${form.productImg}`} alt="Current Image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />}
+                        {portal.productImg && <img src={`/static/${portal.productImg}`} alt="Product image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />}
                         <div className=''>
-                            <p className='text-base font-semibold'>{form.productName}</p>
-                            <p className='text-sm text-gray-600'>{form.productDescription}</p>
+                            <p className='text-base font-semibold'>{portal.productName}</p>
+                            <p className='text-sm text-gray-600'>{portal.productDescription}</p>
                         </div>
                     </div>
 
                     {regions && (
                         <div className='mt-10 text-sm text-green-600'>
+                            
                             <div className='font-semibold flex items-center gap-x-1'>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 animate-pulse">
                                     <path fillRule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
@@ -173,12 +120,13 @@ const UserPortal = () => {
                     )}
 
                     <div className='mt-40 flex justify-between'>
-                        <a href={process.env.REACT_APP_ENDPOINT} target='_blank'>
+                        <a className="text-sm flex gap-x-2 items-center mb-4 sm:mb-0 cursor-pointer">
+                            Powered by 
                             <img className="h-7 w-auto grayscale" src="/logo.svg" alt=""/>
                         </a>
                         <div className='flex gap-x-2 text-gray-600'>
-                            {form.termsUrl && <a href={form.termsUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Terms')}</a>}
-                            {form.privacyPolicyUrl && <a href={form.privacyPolicyUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Privacy')}</a>}
+                            {portal.termsUrl && <a href={portal.termsUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Terms')}</a>}
+                            {portal.privacyPolicyUrl && <a href={portal.privacyPolicyUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Privacy')}</a>}
                         </div>
                     </div>
                     
@@ -226,18 +174,19 @@ const UserPortal = () => {
                             
 
                             {/* Disclosure Panel */}
-                            <Disclosure.Panel className="sm:hidden absolute top-16 z-20 w-full">
+                            <Disclosure.Panel className="lg:hidden absolute top-16 z-20 w-full">
                                 <div className="bg-white p-4">
                                     <div className='flex gap-x-3 mt-10'>
-                                        {form.productImg && <img src={`/static/${form.productImg}`} alt="Product image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />}
+                                        {portal.productImg && <img src={`/static/${portal.productImg}`} alt="Product image" className="h-14 w-14 rounded ring-gray-300 shadow-md" />}
                                         <div className=''>
-                                            <p className='text-base font-semibold'>{form.productName}</p>
-                                            <p className='text-sm text-gray-600'>{form.productDescription}</p>
+                                            <p className='text-base font-semibold'>{portal.productName}</p>
+                                            <p className='text-sm text-gray-600'>{portal.productDescription}</p>
                                         </div>
                                     </div>
 
                                     {regions && (
                                         <div className='mt-10 text-sm text-green-600'>
+                                            
                                             <div className='font-semibold flex items-center gap-x-1'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 animate-pulse">
                                                     <path fillRule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
@@ -249,12 +198,13 @@ const UserPortal = () => {
                                     )}
 
                                     <div className='mt-40 flex justify-between'>
-                                        <a href={process.env.REACT_APP_ENDPOINT} target='_blank'>
+                                        <a className="text-sm flex gap-x-2 items-center mb-4 sm:mb-0 cursor-pointer">
+                                            Powered by 
                                             <img className="h-7 w-auto grayscale" src="/logo.svg" alt=""/>
                                         </a>
                                         <div className='flex gap-x-2 text-gray-600'>
-                                            {form.termsUrl && <a href={form.termsUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Terms')}</a>}
-                                            {form.privacyPolicyUrl && <a href={form.privacyPolicyUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Privacy')}</a>}
+                                            {portal.termsUrl && <a href={portal.termsUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Terms')}</a>}
+                                            {portal.privacyPolicyUrl && <a href={portal.privacyPolicyUrl} className='text-sm underline underline-offset-4' target='_blank'>{t('Privacy')}</a>}
                                         </div>
                                     </div>
                                 </div>
@@ -264,14 +214,15 @@ const UserPortal = () => {
                     </Disclosure>
                         
                     <div className='mx-auto max-w-sm px-2 sm:px-0'>
-                        <div className='sm:hidden flex justify-between items-center mb-6'>
-                            <a href={form.cancelUrl} className='font-bold flex text-sm items-center hover:text-zinc-600'>
+                        
+                        <div className='lg:hidden flex justify-between items-center mb-6'>    
+                            <a href='#' className='font-bold flex text-sm items-center hover:text-zinc-600'>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" className='me-2'><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128z"/></svg>
                                 <span>{t("Back")}</span>
                             </a>
-                            <img src={`/static/${organization.logo}`} alt="Current Image" className="w-14 h-auto rounded ring-gray-300" />
+                            <img src={`/static/${portal.brandImg}`} alt="Brand logo" className="w-14 h-auto rounded ring-gray-300" />
                         </div>
-                                        
+
                         <p className="lg:hidden text-xl font-bold tracking-tight text-zinc-900">{t('get_notified')}</p>
                         
                         <form 
@@ -293,14 +244,12 @@ const UserPortal = () => {
                                             <input
                                                 name="name"
                                                 type="text"
-                                                value={data.name}
-                                                onChange={handleChange}
                                                 required
                                                 className={
                                                     classNames(
-                                                        form.formStyle === 'Pill' ? 'rounded-full' : null,
-                                                        form.formStyle === 'Sharp' ? null : null,
-                                                        form.formStyle === 'Rounded' ? 'rounded-md' : null,
+                                                        portal.style === 'Pill' ? 'rounded-full' : null,
+                                                        portal.style === 'Sharp' ? null : null,
+                                                        portal.style === 'Rounded' ? 'rounded-md' : null,
                                                         'relative cursor-default select-none py-2 pl-3 pr-9',
                                                         "block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-zinc-600 sm:text-sm sm:leading-6"
                                                         )
@@ -319,14 +268,14 @@ const UserPortal = () => {
                                         <input
                                         name="email"
                                         type="text"
-                                        value={data.email}
-                                        onChange={handleChange}
+                                        // value={data.email}
+                                        // onChange={handleChange}
                                         required
                                         className={
                                             classNames(
-                                            form.formStyle === 'Pill' ? 'rounded-full' : null,
-                                            // form.formStyle === 'Sharp' ? null : null,
-                                            form.formStyle === 'Rounded' ? 'rounded-md' : null,
+                                            portal.style === 'Pill' ? 'rounded-full' : null,
+                                            // portal.style === 'Sharp' ? null : null,
+                                            portal.style === 'Rounded' ? 'rounded-md' : null,
                                             'relative cursor-default select-none py-2 pl-3 pr-9',
                                             "block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-zinc-600 sm:text-sm sm:leading-6"
                                         )}
@@ -346,9 +295,9 @@ const UserPortal = () => {
                                                 <Listbox.Button 
                                                     className={
                                                         classNames(
-                                                        form.formStyle === 'Pill' ? 'rounded-lg' : null,
-                                                        form.formStyle === 'Rounded' ? 'rounded-md' : null,
-                                                        error ? 'ring-1 ring-red-300' : null,
+                                                        portal.style === 'Pill' ? 'rounded-lg' : null,
+                                                        portal.style === 'Rounded' ? 'rounded-md' : null,
+                                                        // error ? 'ring-1 ring-red-300' : null,
                                                         "relative w-full cursor-default bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm focus:outline-none sm:text-sm sm:leading-6"
                                                     )}
                                                     >
@@ -373,9 +322,9 @@ const UserPortal = () => {
                                                     <Listbox.Options 
                                                         className={
                                                             classNames(
-                                                                form.formStyle === 'Pill' ? 'rounded-lg' : null,
-                                                                // form.formStyle === 'Sharp' ? null : null,
-                                                                form.formStyle === 'Rounded' ? 'rounded-md' : null,
+                                                                portal.style === 'Pill' ? 'rounded-lg' : null,
+                                                                // portal.style === 'Sharp' ? null : null,
+                                                                portal.style === 'Rounded' ? 'rounded-md' : null,
                                                                 "absolute z-10 mt-1 max-h-56 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                                                             
                                                         )}
@@ -426,7 +375,7 @@ const UserPortal = () => {
                                             </Listbox>
                                         </div>
                                         <div>
-                                            <AutocompleteSearch selectedPlace={selectedPlace} onSelectPlace={handleSelectPlace} roundedSettings={form.formStyle} placeholder={t('Address')}/>
+                                            <AutocompleteSearch selectedPlace={selectedPlace} onSelectPlace={handleSelectPlace} roundedSettings={portal.style} placeholder={t('Address')}/>
                                         </div>
                                     </div>
 
@@ -434,14 +383,14 @@ const UserPortal = () => {
 
                                 <button
                                     id="btn-submit"
-                                    type="submit"
-                                    style={{ backgroundColor: form.formColor }}
+                                    type="button"
+                                    style={{ backgroundColor: portal.color }}
                                     className={`mt-2 flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500`}
                                 >
                                     {t('Continue')}
                                 </button>
                             <p className='text-xs mt-2 text-gray-600'>
-                                {t('submit_helper', {organization: organization.name})}
+                                {t('submit_helper', {organization: portal.brandName})}
                             </p>
                             
                         </form>
@@ -452,4 +401,4 @@ const UserPortal = () => {
   );
 };
 
-export default UserPortal;
+export default PortalPreview;

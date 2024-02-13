@@ -1,5 +1,5 @@
 const { Customer } = require('../models/customer');
-const { Form } = require('../models/form')
+const { Portal } = require('../models/portal')
 const csv = require('fast-csv');
 
 
@@ -15,9 +15,11 @@ module.exports.addCustomer = async (req, res, next) => {
         address: req.body.address,
     }).save()
 
-    const form = await Form.findOne({ _id: portalId })
-    form.customers++
-    form.save()
+    const portal = await Portal.findOneAndUpdate(
+        { _id: portalId },
+        { $inc: { customers: 1 } },
+        { new: true } // To return the modified document
+    );
 
     res.json({message: "OK"})
 }
@@ -28,8 +30,8 @@ module.exports.fetchCustomers = async (req, res, next) => {
     const PAGE_SIZE = 25
     const page = parseInt(req.query.page || "0")
 
-    const total = await Customer.countDocuments({portalId: portalId})
-    const customers = await Customer.find({portalId: portalId})
+    const total = await Customer.countDocuments({ portalId: portalId })
+    const customers = await Customer.find({ portalId: portalId })
         .limit(PAGE_SIZE)
         .skip(PAGE_SIZE * page)
     

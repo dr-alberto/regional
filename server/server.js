@@ -29,26 +29,33 @@ app.use(
     })
 );
   
-app.use(require("./routes/auth"));
-app.use(require("./routes/forms"));
-app.use(require("./routes/organizations"));
-app.use(require("./routes/customers"));
-app.use(require("./routes/payments"));
-
+app.use('/api', require("./routes/auth"));
+app.use('/api', require("./routes/sites"));
+app.use('/api', require("./routes/portals"));
+app.use('/api', require("./routes/prompts"));
+app.use(require("./routes/live"));
+// app.use(require("./routes/forms"));
+// app.use(require("./routes/organizations"));
+app.use('/api', require("./routes/customers"));
+app.use('/api', require("./routes/payments"));
+app.use('/api', require("./routes/integrations"));
 
 app.use('/static', express.static('public')); // Images on 'uploads' directory are visible
 
-const buildPath = path.join(__dirname, './../client/build');
 
+const buildPath = path.join(__dirname, './../client/build');
 app.use(express.static(buildPath, { extensions: ['html', 'js', 'css'] }));
 
+
+// Serve widget
+const distPath = path.join(__dirname, './../client/dist');
+app.use('/widget', express.static(distPath));
 
 
 const dbURI = process.env.ATLAS_URI;
 
 mongoose.connect(dbURI)
 .then((res) => {
-
     // Production / development build
     if (process.env.NODE_ENV === 'production') {
         app.use(express.static(path.join(__dirname, '../client/build')));
@@ -58,6 +65,7 @@ mongoose.connect(dbURI)
             path.resolve(__dirname, '../', 'client', 'build', 'index.html')
           )
         );
+        console.log("Production server setup")
     }
 
     app.listen(process.env.PORT, () => {

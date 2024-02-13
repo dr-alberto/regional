@@ -171,7 +171,6 @@ export default function Settings() {
             // Valid subdomain
             setSubDomain(data.subdomain)
         }
-
     }
 
     
@@ -341,7 +340,7 @@ export default function Settings() {
             {subdomain && <ShareModal></ShareModal>}
             <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <div className="space-y-12">
                     <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base font-semibold leading-7 text-gray-900">Organization</h2>
@@ -400,7 +399,7 @@ export default function Settings() {
                     Save
                     </button>
                 </div>
-            </form>
+            </form> */}
 
 
             <form onSubmit={handleCustomDomainSubmit}>
@@ -495,8 +494,6 @@ export default function Settings() {
                     </div>
 
                 </div>
-
-                
             </form>
 
             

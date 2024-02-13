@@ -3,12 +3,16 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import Navbar from '../components/Navbar';
 import { useParams } from 'react-router';
 import { COUNTRIES } from '../utils/constants';
+import { TextLinkLeft } from '../components/TextLinkLeft';
+import DateTimeDisplay from '../components/DateTimeDisplay';
+
+
 
 
 export default function PortalUsers() {
     
     const { user } = useAuthContext();
-    const { portalId } = useParams()
+    const { siteId, portalId } = useParams()
     const [loading, setLoading] = useState(true);
     const [customers, setCustomers] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
@@ -22,7 +26,7 @@ export default function PortalUsers() {
     useEffect(() => {
         const fetchFormUsers = async () => {
             try {
-                const response = await fetch(`/customers/${portalId}?page=${pageNumber}`, {
+                const response = await fetch(`/api/customers/${portalId}?page=${pageNumber}`, {
                     headers: {
                         "x-access-token": user.token
                     },
@@ -124,7 +128,7 @@ export default function PortalUsers() {
 
     async function handleDownload(e) {
         if (count > 0) {
-            const response = await fetch(`/customers/${portalId}/download`, {
+            const response = await fetch(`/api/customers/${portalId}/download`, {
                 headers: {
                     "x-access-token": user.token
                 }});
@@ -152,13 +156,8 @@ export default function PortalUsers() {
             <main>
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     <div className='flex justify-between'>
-                    <a
-                        href="/users"
-                        onClick={handleNext}
-                        className="relative my-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    >
-                        Return
-                    </a>
+                    
+                    <TextLinkLeft text={'Return'} url={`/users/${siteId}`}/>
                     <a
                         href="#"
                         onClick={handleDownload}
@@ -212,7 +211,7 @@ export default function PortalUsers() {
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            {customer.createdAt}
+                                            <DateTimeDisplay isoDatetime={customer.createdAt}/>
                                         </p>
                                     </td>
                                 </tr>)

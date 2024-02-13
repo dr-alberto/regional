@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const customerSchema = new mongoose.Schema({
-    portalId: { type: mongoose.Schema.Types.ObjectId, ref: 'Form', required: true },
+    portalId: { type: mongoose.Schema.Types.ObjectId, ref: 'Portal', required: true },
     name: { type: String, required: true },
     email: { type: String, required: true },
     country: { type: String, required: true },

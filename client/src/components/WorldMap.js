@@ -69,7 +69,7 @@ const WorldMap = ({ data }) => {
     // }
 
     return (
-        <MapContainer center={[30, 0]} zoom={2} scrollWheelZoom={false} style={{ height: '500px', width: '100%', 'z-index': 0}} >
+        <MapContainer center={[30, 0]} zoom={2} scrollWheelZoom={false} style={{ height: '500px', width: '100%', 'z-index': 0}} className='rounded-lg'>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

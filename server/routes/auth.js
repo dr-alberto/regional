@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 
 
-router.post("/api/signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
         const user = req.body;
         const { error, value } = validateUser(user);
@@ -103,7 +103,7 @@ router.post("/api/signup", async (req, res) => {
 // });
 
 
-router.post('/api/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const userLogging = req.body;
 
     const user = await User.findOne({email: userLogging.email})

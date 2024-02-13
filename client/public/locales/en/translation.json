@@ -10,5 +10,6 @@
     "Continue": "Continue",
     "Country": "Country",
     "Address": "Address",
-    "submit_helper": "By continuing, you allow {{organization}} to get in touch with you once they have launched on your region in accordance with their terms."
+    "submit_helper": "By continuing, you allow {{organization}} to get in touch with you once they have launched on your region in accordance with their terms.",
+    "header": "Capture tomorrow's markets today"
 }

@@ -65,7 +65,7 @@ router.get("/live/:id", async (req, res) => {
         
     })
     .catch((error) => {
-        res.status(404).json({ message: 'Not ok'})
+        res.status(404).json({ message: 'Not ok' })
     })
 })
 
@@ -130,8 +130,6 @@ router.get("/api/forms/overview", requireAuth, async (req, res) => {
         conversionRate,
         countriesCount
     })
-
-    
 })
 
 // GET form
