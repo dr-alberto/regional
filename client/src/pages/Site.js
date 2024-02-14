@@ -10,7 +10,7 @@ import { classNames } from '../utils/utils';
 import { PromptGrid } from '../components/PromptGrid';
 import { TextLinkLeft } from '../components/TextLinkLeft'
 import PortalCard from '../components/PortalCard';
-
+import { TextLink } from '../components/TextLink';
 
 
 const AnalyticsCard = ({ number, description }) => {
@@ -271,14 +271,9 @@ const PortalsGrid = ({ portals, updatePortals }) => {
 
                 {/* User has no plan */}
                 {[startupPriceId, expansionPriceId, growthPriceId].indexOf(userPlan) === -1 && (
-                    <div className='mt-2'>
-                        You need to select a plan to create and manage user portals. 
-                        <a href="/billing" className='font-bold text-teal-600 flex gap-x-1 items-center w-fit hover:text-teal-500'>
-                            Select a plan
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </a>
+                    <div className='col-span-1 flex flex-col gap-y-1 bg-slate-50 items-center justify-center border border-dashed border-zinc-300 rounded-md hover:shadow-md h-40'>
+                        You need to select a plan to get started
+                        <TextLink text={"Select a plan"} url={"/billing"}/>
                     </div>
                 )}
 
@@ -300,27 +295,17 @@ const PortalsGrid = ({ portals, updatePortals }) => {
 
                 
                 {(userPlan === startupPriceId) && (portals.length !== 0) && (
-                    <div className='mt-2'>
-                        You need to upgrate your plan to create more user portals. 
-                        <a href="/billing" className='font-bold text-teal-600 flex gap-x-1 items-center w-fit hover:text-teal-500'>
-                            Upgrade your plan
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </a>
+                    <div className='col-span-1 flex flex-col bg-slate-50 items-center justify-center border border-dashed border-zinc-300 rounded-md hover:shadow-md h-40'>
+                        You need to upgrade your plan to add more portals
+                        <TextLink text={"Upgrade plan"} url={"/billing"}/>
                     </div>
                 )}
 
                 {/* User has growth plan */}
                 {(userPlan === expansionPriceId) && (portals.length >= 10) && (
-                    <div className='mt-2'>
-                        You need to upgrate your plan to create more user portals. 
-                        <a href="/billing" className='font-bold text-teal-600 flex gap-x-1 items-center w-fit hover:text-teal-500'>
-                            Upgrade your plan
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </a>
+                    <div className='col-span-1 flex flex-col bg-slate-50 items-center justify-center border border-dashed border-zinc-300 rounded-md hover:shadow-md h-40'>
+                        You need to upgrade your plan to add more portals
+                        <TextLink text={"Upgrade plan"} url={"/billing"}/>
                     </div>
                 )}
 

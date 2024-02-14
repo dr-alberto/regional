@@ -100,7 +100,7 @@ export default function PromptCard({ prompt })  {
     return (
         <>
         <DeletePromptModal prompt={prompt} open={open} setOpen={setOpen}/>
-        <div className="col-span-1 flex items-center justify-center border border-zinc-300 rounded-md hover:shadow-md h-40">
+        <div className="col-span-1 flex items-center justify-center rounded-lg shadow border border-slate-200 bg-white hover:shadow-md hover:bg-slate-50/75 h-40">
             <div className='grid grid-cols-12 w-full h-full'>
                 <a href={`/prompts/${prompt._id}`} className="w-full h-full px-4 py-4 col-span-11">
                     <div className="text-zinc-950 text-4xl font-bold">{prompt.name}</div>

@@ -100,7 +100,7 @@ module.exports.fetchPrompt = async (req, res, next) => {
     const portal = await Portal.findById(prompt.portalId)
 
     const user = await User.findById(site.users[0])
-    const planId = await getPriceIdFromSubscription(user.subscriptionId);
+    const planId = user.subscriptionId ? await getPriceIdFromSubscription(user.subscriptionId) : null;
 
     // Disable watermark only for users with growth plan
     const useWatermark = !(planId === process.env.STRIPE_PRICE_GROWTH)

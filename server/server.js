@@ -38,6 +38,7 @@ app.use(require("./routes/live"));
 // app.use(require("./routes/organizations"));
 app.use('/api', require("./routes/customers"));
 app.use('/api', require("./routes/payments"));
+app.use(require("./routes/webhooks"));
 app.use('/api', require("./routes/integrations"));
 
 app.use('/static', express.static(path.join(__dirname, 'public'))); // Images on 'uploads' directory are visible

@@ -5,12 +5,11 @@ import worldGeoJSON from '../assets/countries.geo.json'; // Path to your GeoJSON
 
 
 
-
-
 const WorldMap = ({ data }) => {
     const [geoJson, setGeoJson] = useState(null);
 
     useEffect(() => {
+
         if (data && worldGeoJSON) {
             const dataMap = new Map(data.map(item => [item.id, item.value]));
 
@@ -33,11 +32,11 @@ const WorldMap = ({ data }) => {
 
     const getColor = value => {
         // Define your color scale here
-        return value > 50 ? '#800026' :
-            value > 25  ? '#BD0026' :
-            value > 10  ? '#E31A1C' :
-            value > 0   ? '#FC4E2A' :
-                            '#fff'; // Default color
+        return value > 50 ? '#0D9488' :
+            value > 25  ? '#0D948875' :
+            value > 10  ? '#0D948850' :
+            value > 0   ? '#0D948825' :
+                            '#FFF'; // Default color
     };
 
     const style = feature => {
@@ -69,22 +68,15 @@ const WorldMap = ({ data }) => {
     // }
 
     return (
-        <MapContainer center={[30, 0]} zoom={2} scrollWheelZoom={false} style={{ height: '500px', width: '100%', 'z-index': 0}} className='rounded-lg'>
+        <MapContainer center={[30, 0]} zoom={2.5} scrollWheelZoom={false} style={{ height: '500px', width: '100%', 'z-index': 0}} className='rounded-lg'>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                
             />
             {geoJson && <GeoJSON data={geoJson} style={style} />}
         </MapContainer>
     );
-    
-    // return (
-    //     <MapContainer center={[51.505, -0.09]} zoom={3} scrollWheelZoom={false} className='h-96'>
-    //         <TileLayer
-    //             attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
-    //             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-    //     </MapContainer>
-    // );
 };
 
 export default WorldMap;

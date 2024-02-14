@@ -320,14 +320,17 @@ export default function Prompt() {
                                 </div>
                             </div>
                                 
-                            <div className="bg-white p-4 flex sm:flex-row flex-col justify-between items-center">
+                            <div className={classNames(
+                                watermark ? "justify-between" : "justify-end",
+                                "bg-white p-4 flex sm:flex-row flex-col items-center"
+                            )}>
                                 {watermark && (
                                     <a href={ENDPOINT} style={{ fontFamily: 'system-ui, sans-serif' }} target='_blank' className="text-sm flex gap-x-2 items-center mb-4 sm:mb-0">
                                         Powered by 
                                         <img className="h-7 w-auto grayscale" src={`${ENDPOINT}/logo.svg`} alt=""/>
                                     </a>
                                 )}
-                                <div className="sm:flex sm:flex-row-reverse w-full sm:w-auto">
+                                <div className="sm:flex sm:flex-row-reverse w-full sm:w-auto right-0">
                                     {selected && !selectedIsAvailable && (
                                         <button
                                             type="button"

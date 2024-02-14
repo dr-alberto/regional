@@ -251,6 +251,21 @@ export const EditPrompt = () => {
                                                     </div>
                                                 )}
                                             </RadioGroup.Option>
+                                            <RadioGroup.Option value="shopify">
+                                                {({ checked }) => (
+                                                    <div className={
+                                                        classNames(
+                                                            checked ? 'bg-slate-100 border-2 ' : '',
+                                                            'my-2 border border-1 border-slate-200 rounded-lg p-2 cursor-pointer hover:bg-slate-50'
+                                                        )
+                                                    }>
+                                                        <div className='flex items-center justify-between font-semibold leading-6 text-gray-900'>
+                                                        Shopify
+                                                        </div>
+                                                        <div className='block text-sm leading-6 text-gray-700'>Custom Shopify integration</div>
+                                                    </div>
+                                                )}
+                                            </RadioGroup.Option>
                                         </RadioGroup>
                                         
                                         {publish === 'manual' && (
@@ -272,16 +287,14 @@ export const EditPrompt = () => {
                                         {publish === 'wordpress' && (
                                             <div className="flex flex-col">
                                                 <div className="flex justify-between items-center">
-                                                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Add to a Wordpress site</label>
+                                                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Coming soon</label>
                                                 </div>
-
-                                                <div className="mt-2">
-                                                    <input
-                                                    type="text"
-                                                    value={`${ENDPOINT}/live/${id}`}                                                
-                                                    disabled
-                                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                                                    />
+                                            </div>
+                                        )}
+                                        {publish === 'shopify' && (
+                                            <div className="flex flex-col">
+                                                <div className="flex justify-between items-center">
+                                                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Coming soon</label>
                                                 </div>
                                             </div>
                                         )}

@@ -19,8 +19,6 @@ const Portal = () => {
     const [data, setData] = useState({});
     const [error, setError] = useState(false);
 
-    const ApiKey = "AIzaSyAYQjHut29uoD0cb8ejPKD0zsp_B_2Wq9I"
-    
     const [selectedPlace, setSelectedPlace] = useState(null);
 
     const handleSelectPlace = (place) => {

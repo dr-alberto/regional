@@ -153,7 +153,6 @@ async function hasSubdomainWithCNAME(domain, subdomain, cname) {
         return cnameRecords.includes(cname);
     } catch (error) {
         // Handle errors (e.g., no such domain, no CNAME record, etc.)
-        console.error(error);
         return false;
     }
 }
