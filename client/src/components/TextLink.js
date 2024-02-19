@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export const TextLink = ({text, url}) => {
+export const TextLink = ({text, url, target}) => {
     const [hover, setHover] = useState(false)
 
     return (
@@ -9,6 +9,7 @@ export const TextLink = ({text, url}) => {
             href={url}
             onMouseEnter={(e) => setHover(true)}
             onMouseLeave={(e) => setHover(false)}
+            target={target}
             className="flex gap-x-1 items-center text-sm font-bold leading-6 text-teal-600 hover:text-blue-900"
         >
             {text}
