@@ -1,5 +1,3 @@
-import { lazy, Suspense } from 'react';
-import { useInView } from 'react-intersection-observer';
 import Navbar from '../components/home/Navbar.jsx';
 import Header from '../components/home/Header.jsx';
 import InfoSection from '../components/home/InfoSection.jsx';
