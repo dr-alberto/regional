@@ -10,7 +10,7 @@ export default function PromptSection() {
                 <div className="lg:pr-8 lg:pt-4 my-auto">
                     <div className="lg:max-w-lg">
                         <h2 className="text-base font-semibold leading-7 text-teal-600">Prompt</h2>
-                        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">The best way to integrate portals to your website</p>
+                        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Notify users in which regions your business is available when they enter your site</p>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
                             Elevate your user engagement strategy redirecting your website visitors from unavailable regions to a user portal.
                         </p>

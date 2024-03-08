@@ -10,7 +10,7 @@ export default function FooterSection() {
                 <div className="relative isolate overflow-hidden bg-teal-600 px-6 py-16 shadow-xl rounded-xl sm:px-16 md:pt-24 lg:px-16 lg:pt-0">
                     <div className="mx-auto max-w-md text-center lg:mx-auto lg:py-32 ">
                         <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                            Start the path to becoming a global brand
+                          Prepare your business for expansion
                         </h2>
                         <p className="mt-6 text-lg leading-8 text-white">
                             Start using Regional today
