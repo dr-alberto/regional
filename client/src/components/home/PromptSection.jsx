@@ -12,7 +12,7 @@ export default function PromptSection() {
                 Prompt
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Informs users of the available regions when they enter your
+                Inform users of the available regions when they enter your
                 website
               </p>
               <p className="mt-6 text-lg leading-8 text-gray-600">
