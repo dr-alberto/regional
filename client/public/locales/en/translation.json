@@ -1,15 +1,42 @@
 {
-    "Name": "Name",
-    "Back": "Back",
-    "Email": "Email",
-    "Terms": "Terms",
-    "Privacy": "Privacy",
-    "get_notified": "Get notified when it is available in your region",
-    "currently_available": "Available regions",
-    "Country or region": "Country or region",
-    "Continue": "Continue",
-    "Country": "Country",
-    "Address": "Address",
-    "submit_helper": "By continuing, you allow {{organization}} to get in touch with you once they have launched on your region in accordance with their terms.",
-    "header": "Capture tomorrow's markets today"
+  "Name": "Name",
+  "Back": "Back",
+  "Email": "Email",
+  "Terms": "Terms",
+  "Privacy": "Privacy",
+  "get_notified": "Get notified when it is available in your region",
+  "currently_available": "Available regions",
+  "Country or region": "Country or region",
+  "Continue": "Continue",
+  "Country": "Country",
+  "Address": "Address",
+  "submit_helper": "By continuing, you allow {{organization}} to get in touch with you once they have launched on your region in accordance with their terms.",
+
+  "header_title": "Prepare for a seamless expansion to new regions",
+  "header_desc": "Collect contact information from users in untapped regions and cultivate a pre-existing audience to simplify your launches into new markets.",
+  "header_btn_start": "Get started",
+  "header_btn_more": "Learn more",
+
+  "nav_solution": "Solution",
+  "nav_pricing": "Pricing",
+  "nav_demo": "Live demo",
+  "nav_login": "Log in",
+  
+  "sol_helper": "Why Regional",
+  "sol_header": "More than 50% of Internet traffic is organic",
+  "sol_desc": "Everyone can visit your website, but maybe not everyone can buy your products. If your products are limited to some countries, add Regional to your website to build a list of interested users in other regions.",
+  
+  "sol_1_header": "Instant global outreach",
+  "sol_1_desc": "From the moment you add Regional to your website, you can instantly reach and engage with potential customers in untapped regions.",
+  "sol_2_header": "Direct revenue impact",
+  "sol_2_desc": "Increase the chances of turning curious users into paying customers, driving immediate revenue growth as you launch in new regions.",
+  "sol_3_header": "Smart marketing spend",
+  "sol_3_desc": "Optimize marketing budgets by focusing on regions with proven interest, ensuring every marketing dollar is spent efficiently on potential high-conversion areas.",
+  "sol_4_header": "Low risk market exploration",
+  "sol_4_desc": "From day one, you can explore new markets with minimal risk, using Regional to gauge interest before committing extensive resources, providing a low-cost, low-risk approach to international expansion.",
+
+  "portal_header": "Capture potential users from untapped regions",
+  "portal_desc": "Add a user portal to your website and measure the level of interest in your products across regions where your products aren't yet available.",
+
+  "btn_live_demo": "See live demo"
 }
