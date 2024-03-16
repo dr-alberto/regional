@@ -6,7 +6,7 @@ import PromptSection from '../components/home/PromptSection.jsx';
 import FeaturesSection from '../components/home/FeaturesSection.jsx';
 import PricingSection from '../components/home/PricingSection.jsx';
 import FooterSection from '../components/home/FooterSection.jsx';
-
+import IntegrationSection from '../components/home/IntegrationSection.jsx';
 
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
             <Header />
             <InfoSection />
             <PortalSection />
+            <IntegrationSection />
             <PromptSection />
             <FeaturesSection />
             <PricingSection />

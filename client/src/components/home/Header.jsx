@@ -22,8 +22,8 @@ export default function Header() {
           </div>
           <div className="animate__animated animate__fadeIn">
             <img
-              src="/preview.png"
-              alt="Product screenshot"
+              src="/dashboard.png"
+              alt="Dashboard screenshot"
               loading="lazy"
               className="mt-10 sm:w-[78rem] sm:max-w-none rounded-md shadow-md ring-1 ring-teal-600/25"
             />
