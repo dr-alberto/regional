@@ -2,7 +2,20 @@ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const { User } = require('../models/user')
 const router = express.Router();
+const getPriceIdFromSubscription = require('./utils');
 
+
+function priceIdtoPlan(priceId) {
+  if (priceId === process.env.STRIPE_PRICE_STARTUP_MONTHLY || priceId === process.env.STRIPE_PRICE_STARTUP_YEARLY) {
+    return 1;
+  }
+  else if (priceId === process.env.STRIPE_PRICE_EXPANSION_MONTHLY || priceId === process.env.STRIPE_PRICE_EXPANSION_YEARLY) {
+    return 2;
+  }
+  else if (priceId === process.env.STRIPE_PRICE_GROWTH_MONTHLY || priceId === process.env.STRIPE_PRICE_GROWTH_YEARLY) {
+    return 3;
+  }
+}
 
 router.post("/webhook", async (req, res) => {
     let data;
@@ -43,11 +56,15 @@ router.post("/webhook", async (req, res) => {
             const customerId = data.object.customer
             const subscriptionId = data.object.subscription
 
+            const priceId = await getPriceIdFromSubscription(subscriptionId);
+            const plan = priceIdtoPlan(priceId)
+
             const user = await User.findById(clientReferenceId)
             user.customerId = customerId
             user.subscriptionId = subscriptionId
+            user.plan = plan
             
-            const newUser = await user.save()
+            await user.save()
 
         } break;
 
@@ -56,9 +73,9 @@ router.post("/webhook", async (req, res) => {
             const subscription = data.object
             const customerId = subscription.customer
 
-            const newUser = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { customerId: customerId }, 
-                { $unset: { subscriptionId: "" } }
+                { subscriptionId: "", plan: 0 }
             )
 
         } break;
@@ -67,10 +84,13 @@ router.post("/webhook", async (req, res) => {
             const subscription = data.object
             const customerId = subscription.customer
             const subscriptionId = subscription.id
+            
+            const priceId = await getPriceIdFromSubscription(subscriptionId);
+            const plan = priceIdtoPlan(priceId)
 
-            const newUser = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { customerId: customerId }, 
-                { subscriptionId: subscriptionId }
+                { subscriptionId: subscriptionId, plan: plan }
             )
                 
         } break;

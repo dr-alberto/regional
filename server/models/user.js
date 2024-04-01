@@ -8,7 +8,8 @@ const userSchema = mongoose.Schema({
     email: {type: String, required: [true, "Email is required"], unique: true},
     password: {type: String, required: true},
     customerId: {type: String},
-    subscriptionId: {type: String}
+    subscriptionId: {type: String},
+    plan: {type: Number, default: 0}
 }, {timestamps: true});
 
 

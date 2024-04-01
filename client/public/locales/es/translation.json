@@ -46,13 +46,11 @@
 
   "integrate_header": "Integra Regional en cualquier web o aplicación",
   "integrate_desc": "Crea un portal en un par de clicks y añade un link a tu web o app para redirigir a usuarios interesados.",
+  "integrate_label": "Link a tu portal",
   "integrate_onboarding_header": "Página de registro",
   "integrate_onboarding_desc": "Capta usuarios interesados de otras regiones en tu página de registro.",
   "integrate_checkout_header": "Página de pago",
   "integrate_checkout_desc": "Capta usuarios interesados de otras regiones en tu página de pago.",
-
-
-
 
   "prompt_header": "Informa a usuarios de las regiones disponibles cuando entren en tu web",
   "prompt_desc": "Redirige a los visitantes de tu web de regiones no disponibles a tu portal para que dejen su información de contacto.",

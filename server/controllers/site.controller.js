@@ -91,7 +91,24 @@ module.exports.getUserSites = async (req, res, next) => {
     }
 }
 
+module.exports.getUserSite = async (req, res, next) => {
+  try {
+      const siteId = req.params.id;
+      const site = await Site.findById(siteId)
+      
+      // const annotatedSites = await Promise.all(sites.map(async (site) => {
+      //     const portals = await Portal.countDocuments({ siteId: site._id })
+      //     const prompts = await Prompt.countDocuments({ siteId: site._id })
 
+      //     return {...site.toObject(), portals, prompts} 
+      // }))
+
+      res.json(site)
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Server Error");
+  }
+}
 
 module.exports.deleteSite = async (req, res, next) => {
     const siteId = req.params.id

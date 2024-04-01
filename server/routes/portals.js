@@ -30,9 +30,11 @@ router.post('/portals/:id', requireAuth, upload.fields([{name: 'productImg', max
 
 router.post('/portals/:id/status', requireAuth, portalController.updatePortalStatus)
 
+router.get('/portals/:id/overview', requireAuth, portalController.portalOverview)
+
 router.get('/portals/overview', requireAuth, portalController.portalsOverview)
 
-router.get('/portals/:id', portalController.fetchPortal)
+router.get('/portals/:id', portalController.fetchPortal);
 
 router.get('/portals', requireAuth, portalController.fetchAllPortals)
 

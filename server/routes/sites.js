@@ -25,6 +25,9 @@ router.post("/sites/:id", requireAuth, validators.siteValidator, siteController.
 // GET /sites
 router.get("/sites", requireAuth, siteController.getUserSites);
 
+// GET /sites/:id
+router.get("/sites/:id", requireAuth, siteController.getUserSite);
+
 // DELETE /sites/:id
 router.delete("/sites/:id", requireAuth, siteController.deleteSite);
 

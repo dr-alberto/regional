@@ -32,6 +32,7 @@ module.exports.fetchCustomers = async (req, res, next) => {
 
     const total = await Customer.countDocuments({ portalId: portalId })
     const customers = await Customer.find({ portalId: portalId })
+        .sort({ createdAt: -1})
         .limit(PAGE_SIZE)
         .skip(PAGE_SIZE * page)
     

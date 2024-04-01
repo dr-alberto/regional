@@ -1,4 +1,3 @@
-export const STRIPE_PUB_KEY = process.env.REACT_APP_STRIPE_PUB_KEY
 export const ENDPOINT = process.env.REACT_APP_ENDPOINT
 export const DEMO_LINK = process.env.REACT_APP_DEMO_LINK
 export const DEMO_PROMPT_ID = process.env.REACT_APP_DEMO_PROMPT_ID
